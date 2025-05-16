@@ -76,6 +76,13 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
+    "coveragePathIgnorePatterns": [
+      "src/main.ts",
+      "src/app.module.ts",
+      "src/typeorm-data-source.ts",
+      "src/migrations",
+      ".module.ts"
+    ],
     "testEnvironment": "node"
   }
 }
