@@ -9,9 +9,7 @@ export default function TaskList() {
         queryFn: getAllTasks,
     })
   return (
-    <div className="flex flex-col items-center justify-start gap-2 h-screen">
-        <h1 className="text-3xl font-bold underline">Task list</h1>
-        <div className="flex flex-col justify-center gap-2 items-center p-4 max-w-[800px]">
+    <div className="flex flex-col items-center justify-start gap-2 h-screen max-w-[800px] w-full">
         {isLoading ? (
             <LoadingItem />
         ) : (
@@ -21,7 +19,6 @@ export default function TaskList() {
                 ))}
             </>
         )}
-        </div>
     </div>
   )
 }

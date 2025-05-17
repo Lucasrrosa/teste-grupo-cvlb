@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'tasks' })
 export class TaskEntity {
@@ -13,4 +18,7 @@ export class TaskEntity {
 
   @Column({ type: 'boolean', default: false })
   completed: boolean;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
 }

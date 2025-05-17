@@ -5,11 +5,13 @@ export class TaskResponseDto {
   title: string;
   description?: string;
   completed: boolean;
+  createdAt: Date;
 
-  constructor(partial: TaskEntity) {
-    this.id = partial.id;
-    this.title = partial.title;
-    this.description = partial.description;
-    this.completed = partial.completed;
+  constructor(entity: TaskEntity) {
+    this.id = entity.id;
+    this.title = entity.title;
+    this.description = entity.description;
+    this.completed = entity.completed;
+    this.createdAt = entity.createdAt;
   }
 }
