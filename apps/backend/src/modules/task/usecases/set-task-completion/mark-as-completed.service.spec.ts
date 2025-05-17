@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MarkAsCompletedService } from './mark-as-completed.service';
+import { SetTaskCompletionService } from './mark-as-completed.service';
 import { TaskRepository } from '../../task.repository';
 
 describe('MarkAsCompletedService', () => {
-  let service: MarkAsCompletedService;
+  let service: SetTaskCompletionService;
 
   const mockTaskRepository = {
     save: jest.fn(),
@@ -13,12 +13,12 @@ describe('MarkAsCompletedService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        MarkAsCompletedService,
+        SetTaskCompletionService,
         { provide: TaskRepository, useValue: mockTaskRepository },
       ],
     }).compile();
 
-    service = module.get<MarkAsCompletedService>(MarkAsCompletedService);
+    service = module.get<SetTaskCompletionService>(SetTaskCompletionService);
   });
 
   it('should be defined', () => {
@@ -35,7 +35,7 @@ describe('MarkAsCompletedService', () => {
       completed: true,
     });
 
-    const result = await service.markAsCompleted(taskId);
+    const result = await service.setCompletion(taskId, true);
     expect(result).toEqual({
       ...mockResponse,
       completed: true,

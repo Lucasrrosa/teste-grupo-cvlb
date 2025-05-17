@@ -5,14 +5,15 @@ import {
   Get,
   Inject,
   Param,
+  ParseBoolPipe,
   ParseIntPipe,
   Post,
 } from '@nestjs/common';
-import { CreateTaskDto } from './dtos/CreateTodo.dto';
+import { CreateTaskDto } from './dtos/CreateTask.dto';
 import { CreateTaskService } from './usecases/create-task/create-task.service';
 import { GetAllTasksService } from './usecases/get-all-tasks/get-all-tasks.service';
 import { DeleteTaskService } from './usecases/delete-task/delete-task.service';
-import { MarkAsCompletedService } from './usecases/mark-as-completed/mark-as-completed.service';
+import { SetTaskCompletionService } from './usecases/set-task-completion/mark-as-completed.service';
 
 @Controller('tasks')
 export class TaskController {
@@ -23,7 +24,7 @@ export class TaskController {
   private readonly getAllTasksService: GetAllTasksService;
 
   @Inject()
-  private readonly markAsCompletedService: MarkAsCompletedService;
+  private readonly setTaskCompletionService: SetTaskCompletionService;
 
   @Inject()
   private readonly deleteTaskService: DeleteTaskService;
@@ -40,9 +41,15 @@ export class TaskController {
     return task;
   }
 
-  @Post('mark-as-completed/:id')
-  async markAsCompleted(@Param('id', ParseIntPipe) taskId: number) {
-    const task = await this.markAsCompletedService.markAsCompleted(taskId);
+  @Post('set-completion/:id/:completed')
+  async setTaskCompletion(
+    @Param('id', ParseIntPipe) taskId: number,
+    @Param('completed', ParseBoolPipe) completed: boolean,
+  ) {
+    const task = await this.setTaskCompletionService.setCompletion(
+      taskId,
+      completed,
+    );
     return task;
   }
 

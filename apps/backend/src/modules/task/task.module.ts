@@ -6,7 +6,7 @@ import { CreateTaskService } from './usecases/create-task/create-task.service';
 import { TaskRepository } from './task.repository';
 import { GetAllTasksService } from './usecases/get-all-tasks/get-all-tasks.service';
 import { DeleteTaskService } from './usecases/delete-task/delete-task.service';
-import { MarkAsCompletedService } from './usecases/mark-as-completed/mark-as-completed.service';
+import { SetTaskCompletionService } from './usecases/set-task-completion/mark-as-completed.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TaskEntity])],
@@ -16,7 +16,7 @@ import { MarkAsCompletedService } from './usecases/mark-as-completed/mark-as-com
     TaskRepository,
     GetAllTasksService,
     DeleteTaskService,
-    MarkAsCompletedService,
+    SetTaskCompletionService,
   ],
 })
 export class TaskModule {}

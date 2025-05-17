@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TaskController } from './task.controller';
 import { CreateTaskService } from './usecases/create-task/create-task.service';
 import { GetAllTasksService } from './usecases/get-all-tasks/get-all-tasks.service';
-import { MarkAsCompletedService } from './usecases/mark-as-completed/mark-as-completed.service';
+import { SetTaskCompletionService } from './usecases/set-task-completion/mark-as-completed.service';
 import { DeleteTaskService } from './usecases/delete-task/delete-task.service';
 
 describe('TaskController', () => {
@@ -16,8 +16,8 @@ describe('TaskController', () => {
     getAllTasks: jest.fn(),
   };
 
-  const mockMarkAsCompletedService = {
-    markAsCompleted: jest.fn(),
+  const mockSetTaskCompletionService = {
+    setCompletion: jest.fn(),
   };
 
   const mockDeleteTaskService = {
@@ -37,8 +37,8 @@ describe('TaskController', () => {
           useValue: mockGetAllTasksService,
         },
         {
-          provide: MarkAsCompletedService,
-          useValue: mockMarkAsCompletedService,
+          provide: SetTaskCompletionService,
+          useValue: mockSetTaskCompletionService,
         },
         {
           provide: DeleteTaskService,
@@ -87,12 +87,13 @@ describe('TaskController', () => {
     const taskId = 1;
     const mockResponse = { id: taskId, completed: true };
 
-    mockMarkAsCompletedService.markAsCompleted.mockResolvedValue(mockResponse);
+    mockSetTaskCompletionService.setCompletion.mockResolvedValue(mockResponse);
 
-    const result = await controller.markAsCompleted(taskId);
+    const result = await controller.setTaskCompletion(taskId, true);
 
-    expect(mockMarkAsCompletedService.markAsCompleted).toHaveBeenCalledWith(
+    expect(mockSetTaskCompletionService.setCompletion).toHaveBeenCalledWith(
       taskId,
+      true,
     );
     expect(result).toEqual(mockResponse);
   });
