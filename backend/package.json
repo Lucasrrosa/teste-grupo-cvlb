@@ -15,7 +15,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "ts-node --project ./tsconfig.json --require tsconfig-paths/register ../../node_modules/typeorm/cli",
+    "typeorm": "ts-node --project ./tsconfig.json --require tsconfig-paths/register ./node_modules/typeorm/cli",
     "m:generate": "yarn run typeorm --pretty -d ./src/typeorm-data-source.ts migration:generate",
     "m:create": "yarn typeorm -- migration:create",
     "m:run": "yarn typeorm -d ./src/typeorm-data-source.ts migration:run",
@@ -84,5 +84,6 @@
       ".module.ts"
     ],
     "testEnvironment": "node"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

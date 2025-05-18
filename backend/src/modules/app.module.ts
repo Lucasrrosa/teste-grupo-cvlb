@@ -14,7 +14,7 @@ import { TaskModule } from './task/task.module';
         entities: [`${__dirname}/**/*.entity{.ts,.js}`],
         logging: configService.get('nodenv') === 'dev',
         migrations: [`${__dirname}/migrations/*{.ts,.js}`],
-        synchronize: false,
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),

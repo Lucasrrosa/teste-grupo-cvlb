@@ -1,0 +1,57 @@
+services:
+
+# Development service
+  app-dev:
+    container_name: nestjs-app-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/todo
+      NODENV: development
+      PORT: 3001
+    ports:
+      - '3001:3001'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    profiles:
+      - dev
+
+# Production service
+  app-prod:
+    container_name: backend-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/todo
+      NODENV: production
+      PORT: 3001
+    ports:
+      - "3001:3001"
+    profiles:
+      - prod
+    depends_on:
+      - db
+
+#Postgresql database service
+  db:
+    container_name: db
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=todo
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: always
+    env_file:
+      - .env
+volumes:
+  db_data:
+    driver: local
