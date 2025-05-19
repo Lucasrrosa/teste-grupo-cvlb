@@ -11,13 +11,9 @@
     "dev": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "test": "jest",
-    "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node --project ./tsconfig.json --require tsconfig-paths/register ./node_modules/typeorm/cli",
     "m:generate": "yarn run typeorm --pretty -d ./src/typeorm-data-source.ts migration:generate",
-    "m:create": "yarn typeorm -- migration:create",
     "m:run": "yarn typeorm -d ./src/typeorm-data-source.ts migration:run",
     "m:revert": "yarn typeorm -- -d ./src/typeorm-data-source.ts migration:revert"
   },
